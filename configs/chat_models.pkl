@@ -1,0 +1,217 @@
+class ChatModelConfig {
+    chat_model: String
+    lora: Boolean = false
+    lora_path: String| Null = null
+    lora_base_model: String|Null = null
+    chat_model_type: Null|String(this is "completion"|"instruction"|"chat")
+    chat_model_inference_engine: String(this is "vllm"|"openai"|"anthropic")
+    chat_system_message: Null|String = null
+    chat_endpoint: Null|String
+    chat_template_path: Null|String
+    chat_parameters: Mapping
+    chat_request_sleep: Mapping|Null = null
+}
+
+// close source
+gpt_4: ChatModelConfig = new {
+    chat_model = "gpt-4-0125-preview"
+    chat_model_type = "chat"
+    chat_model_inference_engine = "openai"
+    chat_endpoint = "https://api.openai.com/v1/chat/completions"
+    chat_template_path = null
+    chat_system_message = "You are a helpful assistant."
+    chat_parameters = new Mapping {}
+}
+gpt_4o: ChatModelConfig = new {
+    chat_model = "gpt-4o-2024-08-06"
+    chat_model_type = "chat"
+    chat_model_inference_engine = "openai"
+    chat_endpoint = "https://api.openai.com/v1/chat/completions"
+    chat_template_path = null
+    chat_system_message = "You are a helpful assistant."
+    chat_parameters = new Mapping {}
+}
+gpt_o1: ChatModelConfig = new {
+    chat_model = "o1-preview-2024-09-12"
+    chat_model_type = "chat"
+    chat_model_inference_engine = "openai"
+    chat_endpoint = "https://api.openai.com/v1/chat/completions"
+    chat_template_path = null
+    chat_system_message = "You are a helpful assistant."
+    chat_parameters = new Mapping {}
+}
+claude_sonnet_35: ChatModelConfig = new {
+    chat_model = "claude-3-5-sonnet-20240620"
+    chat_model_type = "chat"
+    chat_model_inference_engine = "anthropic"
+    chat_endpoint = "https://api.anthropic.com/v1/messages"
+    chat_template_path = null
+    chat_system_message = "You are a helpful assistant."
+    chat_parameters = new Mapping {
+        ["max_tokens"] = 4096
+        }
+    chat_request_sleep = new Mapping {
+        ["sleep_time"] = 60
+        ["sleep_every_count"] = 5
+    }
+}
+claude_opus_3: ChatModelConfig = new {
+    chat_model = "claude-3-opus-20240229"
+    chat_model_type = "chat"
+    chat_model_inference_engine = "anthropic"
+    chat_endpoint = "https://api.anthropic.com/v1/messages"
+    chat_template_path = null
+    chat_system_message = "You are a helpful assistant."
+    chat_parameters = new Mapping {
+        ["max_tokens"] = 4096
+        }
+    chat_request_sleep = new Mapping {
+        ["sleep_time"] = 60
+        ["sleep_every_count"] = 5
+    }
+}
+claude_haiku_3: ChatModelConfig = new {
+    chat_model = "claude-3-haiku-20240307"
+    chat_model_type = "chat"
+    chat_model_inference_engine = "anthropic"
+    chat_endpoint = "https://api.anthropic.com/v1/messages"
+    chat_template_path = null
+    chat_system_message = "You are a helpful assistant."
+    chat_parameters = new Mapping {
+        ["max_tokens"] = 4096
+        }
+    chat_request_sleep = new Mapping {
+        ["sleep_time"] = 60
+        ["sleep_every_count"] = 5
+    }
+}
+// open source
+//small
+llama3_1_instruct_8b: ChatModelConfig = new {
+    chat_model = "meta-llama/Meta-Llama-3.1-8B-Instruct"
+    chat_model_type = "instruction"
+    chat_model_inference_engine = "vllm"
+    chat_endpoint = null
+    chat_template_path = null
+    chat_system_message = "You are a helpful assistant."
+    chat_parameters = new Mapping {}
+}
+
+qwen_25_instruct_7b: ChatModelConfig = new {
+    chat_model = "Qwen/Qwen2.5-7B-Instruct"
+    chat_model_type = "instruction"
+    chat_model_inference_engine = "vllm"
+    chat_endpoint = null
+    chat_template_path = null
+    chat_system_message = "You are a helpful assistant."
+    chat_parameters = new Mapping {}
+}
+
+yi_15_9b_16k_chat: ChatModelConfig = new {
+    chat_model = "01-ai/Yi-1.5-9B-Chat-16K"
+    chat_model_type = "chat"
+    chat_model_inference_engine = "vllm"
+    chat_endpoint = null
+    chat_template_path = null
+    chat_system_message = "You are a helpful assistant."
+    chat_parameters = new Mapping {}
+}
+
+// medium
+qwen_25_instruct_32b: ChatModelConfig = new {
+    chat_model = "Qwen/Qwen2.5-32B-Instruct"
+    chat_model_type = "instruction"
+    chat_model_inference_engine = "vllm"
+    chat_endpoint = null
+    chat_template_path = null
+    chat_system_message = "You are a helpful assistant."
+    chat_parameters = new Mapping {}
+}
+
+yi_15_34b_32k_chat: ChatModelConfig = new {
+    chat_model = "01-ai/Yi-1.5-34B-Chat-16K"
+    chat_model_type = "chat"
+    chat_model_inference_engine = "vllm"
+    chat_endpoint = null
+    chat_template_path = null
+    chat_system_message = "You are a helpful assistant."
+    chat_parameters = new Mapping {}
+}
+
+deepseek_v2_lite: ChatModelConfig = new {
+    chat_model = "deepseek-ai/DeepSeek-V2-Lite"
+    chat_model_type = "instruction"
+    chat_model_inference_engine = "vllm"
+    chat_endpoint = null
+    chat_template_path = null
+    chat_system_message = "You are a helpful assistant."
+    chat_parameters = new Mapping {}
+}
+
+// large
+qwen_25_instruct_72b: ChatModelConfig = new {
+    chat_model = "Qwen/Qwen2.5-72B-Instruct"
+    chat_model_type = "instruction"
+    chat_model_inference_engine = "vllm"
+    chat_endpoint = null
+    chat_template_path = null
+    chat_system_message = "You are a helpful assistant."
+    chat_parameters = new Mapping {}
+}
+
+llama3_1_instruct_70b: ChatModelConfig = new {
+    chat_model = "meta-llama/Llama-3.1-70B-Instruct"
+    chat_model_type = "instruction"
+    chat_model_inference_engine = "vllm"
+    chat_endpoint = null
+    chat_template_path = null
+    chat_system_message = "You are a helpful assistant."
+    chat_parameters = new Mapping {}
+}
+
+deepseek_67b_chat: ChatModelConfig = new {
+    chat_model = "deepseek-ai/deepseek-llm-67b-chat"
+    chat_model_type = "chat"
+    chat_model_inference_engine = "vllm"
+    chat_endpoint = null
+    chat_template_path = null
+    chat_system_message = "You are a helpful assistant."
+    chat_parameters = new Mapping {}
+}
+
+// financial domain
+palmyra_70b: ChatModelConfig = new {
+    chat_model = "Writer/Palmyra-Fin-70B-32K"
+    chat_model_type = "instruction"
+    chat_model_inference_engine = "vllm"
+    chat_endpoint = null
+    chat_template_path = null
+    chat_system_message = "You are a helpful assistant."
+    chat_parameters = new Mapping {}
+}
+
+
+chat_model_dict = new Mapping {
+    // close source
+    ["gpt-4"] = gpt_4
+    ["gpt-o1"] = gpt_o1
+    ["gpt-4o"] = gpt_4o
+    ["claude-sonnet-35"] = claude_sonnet_35
+    ["claude-opus-3"] = claude_opus_3
+    ["claude-haiku-3"] = claude_haiku_3
+    // open source
+    // small
+    ["llama-3.1-8b-instruct"] = llama3_1_instruct_8b
+    ["qwen-2.5-7b-instruct"] = qwen_25_instruct_7b
+    ["yi-1.5-9b-16k-chat"] = yi_15_9b_16k_chat
+    // medium
+    ["qwen_25_instruct_32b"] = qwen_25_instruct_32b
+    ["yi_15_34b_32k_chat"] = yi_15_34b_32k_chat
+    ["deepseek_v2_lite"] = deepseek_v2_lite
+    // large
+    ["qwen-2.5-72b-instruct"] = qwen_25_instruct_72b
+    ["llama-3.1-70b-instruct"] = llama3_1_instruct_70b
+    ["deepseek-67b-chat"] = deepseek_67b_chat
+    // financial domain
+    ["palmyra-70b"] = palmyra_70b
+}

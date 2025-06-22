@@ -1,0 +1,162 @@
+import "meta.pkl"
+import "data.pkl"
+import "memory.pkl"
+import "chat_models.pkl"
+import "embedding.pkl"
+import "character_string_catalog.pkl"
+
+// config entry
+hidden config = new meta.MetaConfig {
+    run_name = "exp"
+    agent_name = "agent"
+    // etf
+    //trading_symbols = new Listing {
+    //        "ETF"
+    //}
+    //warmup_start_time = "2019-07-29"
+    //warmup_end_time = "2019-12-30"
+    //test_start_time = "2020-01-02"
+    //test_end_time = "2020-09-21"
+    // stock
+    trading_symbols = new Listing {
+            "UVV"
+            "TSLA"
+            "JNJ"
+    }
+    warmup_start_time = "2020-07-02"
+    warmup_end_time = "2020-09-30"
+    test_start_time = "2020-10-01"
+    test_end_time = "2021-05-06"
+    // BTC
+    //trading_symbols = new Listing {
+    //        "BTC"
+    //}
+    //warmup_start_time = "2023-01-19"
+    //warmup_end_time = "2023-04-04"
+    //test_start_time = "2023-04-05"
+    //test_end_time = "2023-11-05"
+    // ETH
+    //trading_symbols = new Listing {
+    //        "ETH"
+    //}
+    //warmup_start_time = "2023-01-19"
+    //warmup_end_time = "2023-04-02"
+    //test_start_time = "2023-04-03"
+    //test_end_time = "2023-11-05"
+    top_k = 5
+    look_back_window_size = 3
+    momentum_window_size = 3
+    embedding_model = "text-embedding-3-large"
+    chat_model = "llama-3.1-8b-instruct"
+    chat_vllm_endpoint = "http://0.0.0.0:8000"
+    chat_parameters = new Mapping {
+        ["temperature"] = 0.6
+    }
+}
+
+// chat config
+hidden chat_temp = chat_models.chat_model_dict[config.chat_model].toMap().toDynamic()
+hidden chat_param = chat_temp.chat_parameters.toMap().toDynamic()
+hidden config_chat_parameters = config.chat_parameters.toMap().toDynamic()
+hidden chat_chat_parameters_temp = (chat_param) {
+    temperature = config_chat_parameters.temperature
+}.toMap()
+hidden chat_chat_parameters = chat_chat_parameters_temp.toMap()
+chat_config = (chat_temp) {
+    chat_max_new_token = config.chat_max_new_token
+    chat_request_timeout = config.chat_request_timeout
+    chat_vllm_endpoint = config.chat_vllm_endpoint
+    chat_parameters = chat_chat_parameters
+    }
+
+// embedding
+hidden emb_temp = embedding.embedding_models[config.embedding_model].toMap().toDynamic()
+emb_config = (emb_temp) {
+    embedding_timeout = config.embedding_timeout
+}
+
+// environment
+hidden env_data_path_list {
+    for (cur_symbol in config.trading_symbols) {
+        [cur_symbol] = data.env_data_dict[cur_symbol.toLowerCase()]
+    }
+}
+env_config = new {
+    trading_symbols = config.trading_symbols
+    warmup_start_time = config.warmup_start_time
+    warmup_end_time = config.warmup_end_time
+    test_start_time = config.test_start_time
+    test_end_time = config.test_end_time
+    momentum_window_size = config.momentum_window_size
+    env_data_path = env_data_path_list
+    }
+
+// portfolio
+portfolio_config = new {
+    trading_symbols = config.trading_symbols
+    type = if (config.trading_symbols.length > 1) "multi-assets" else "single-asset"
+    cash = if (config.trading_symbols.length > 1) 100_000_000_000 else null
+    look_back_window_size = config.look_back_window_size
+}
+
+// xf config
+hidden memory_db = new {
+    memory_db_endpoint = config.memory_db_endpoint
+    memory_importance_upper_bound = config.memory_importance_upper_bound
+    memory_importance_score_update_step = config.memory_importance_score_update_step
+    trading_symbols = config.trading_symbols
+    short = memory.short_config
+    mid = memory.mid_config
+    long = memory.long_config
+    reflection = memory.reflection_config
+}
+
+// // agent config
+hidden character_string_temp{
+    for (cur_symbol in config.trading_symbols) {
+        [cur_symbol] = character_string_catalog.character_string_dict[cur_symbol]
+        }
+    }
+agent_config = new {
+    agent_name = config.agent_name
+    trading_symbols = config.trading_symbols
+    character_string = character_string_temp
+    top_k = config.top_k
+    memory_db_config = memory_db
+    }
+
+// meta config
+hidden meta_config_temp = config.toMap()
+.remove("agent_name")
+.remove("trading_symbols")
+.remove("log_path")
+.remove("warmup_start_time")
+.remove("warmup_end_time")
+.remove("test_start_time")
+.remove("test_end_time")
+.remove("top_k")
+.remove("look_back_window_size")
+.remove("embedding_model")
+.remove("embedding_timeout")
+.remove("chat_request_timeout")
+.remove("chat_model")
+.remove("chat_max_new_token")
+.remove("chat_vllm_endpoint")
+.remove("chat_parameters")
+.remove("memory_db_endpoint")
+.remove("memory_importance_upper_bound")
+.remove("memory_importance_score_update_step")
+.remove("warmup_checkpoint_save_path")
+.remove("result_save_path")
+.remove("log_save_path")
+.remove("tensor_parallel_size")
+.toDynamic()
+
+meta_config = (meta_config_temp) {
+    warmup_checkpoint_save_path = "results/\(run_name)/\(config.chat_model)/\(env_config.trading_symbols.join("_"))/warmup_checkpoint"
+    warmup_output_save_path = "results/\(run_name)/\(config.chat_model)/\(env_config.trading_symbols.join("_"))/warmup_output"
+    test_checkpoint_save_path = "results/\(run_name)/\(config.chat_model)/\(env_config.trading_symbols.join("_"))/test_checkpoint"
+    test_output_save_path = "results/\(run_name)/\(config.chat_model)/\(env_config.trading_symbols.join("_"))/test_output"
+    result_save_path = "results/\(run_name)/\(config.chat_model)/\(env_config.trading_symbols.join("_"))/final_result"
+    log_save_path = "results/\(run_name)/\(config.chat_model)/\(env_config.trading_symbols.join("_"))/log"
+}

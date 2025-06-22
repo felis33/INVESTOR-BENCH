@@ -1,0 +1,29 @@
+class EmbEndpointConfig {
+  emb_model_name: String
+  request_endpoint: String
+  emb_size: Int(this > 0)
+}
+
+text_embedding_3_large: EmbEndpointConfig = new {
+  emb_model_name = "text-embedding-3-large"
+  request_endpoint = "https://api.openai.com/v1/embeddings"
+  emb_size = 3072
+}
+
+text_embedding_3_small: EmbEndpointConfig = new {
+  emb_model_name = "text-embedding-3-small"
+  request_endpoint = "https://api.openai.com/v1/embeddings"
+  emb_size = 1536
+}
+
+text_embedding_ada_002: EmbEndpointConfig = new {
+  emb_model_name = "text-embedding-ada-002"
+  request_endpoint = "https://api.openai.com/v1/embeddings"
+  emb_size = 1536
+}
+
+embedding_models = new Mapping {
+  ["text-embedding-3-large"] = text_embedding_3_large
+  ["text-embedding-3-small"] = text-embedding-3-small
+  ["text-embedding-ada-002"] = text_embedding_ada_002
+}

@@ -1,0 +1,13 @@
+env_data_dict = new Mapping {
+    ["btc"] = "data/btc.json"
+    ["eth"] = "data/eth.json"
+    ["hon"] = "data/hon.json"
+    ["jnj"] = "data/jnj.json"
+    ["msft"] = "data/msft.json"
+    ["uvv"] = "data/uvv.json"
+    ["etf"] = "data/etf.json"
+    ["aapl"] = "data/aapl.json"
+    ["nflx"] = "data/nflx.json"
+    ["nio"] = "data/nio.json"
+    ["tsla"] = "data/tsla.json"
+}

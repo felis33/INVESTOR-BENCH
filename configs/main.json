@@ -1,0 +1,119 @@
+{
+  "chat_config": {
+    "chat_model": "meta-llama/Meta-Llama-3.1-8B-Instruct",
+    "lora": false,
+    "chat_model_type": "instruction",
+    "chat_model_inference_engine": "vllm",
+    "chat_system_message": "You are a helpful assistant.",
+    "chat_parameters": {
+      "temperature": 0.6
+    },
+    "chat_max_new_token": 1000,
+    "chat_request_timeout": 1000,
+    "chat_vllm_endpoint": "http://0.0.0.0:8000"
+  },
+  "emb_config": {
+    "emb_model_name": "text-embedding-3-large",
+    "request_endpoint": "https://api.openai.com/v1/embeddings",
+    "emb_size": 3072,
+    "embedding_timeout": 600
+  },
+  "env_config": {
+    "trading_symbols": [
+      "UVV",
+      "TSLA",
+      "JNJ"
+    ],
+    "warmup_start_time": "2020-07-02",
+    "warmup_end_time": "2020-09-30",
+    "test_start_time": "2020-10-01",
+    "test_end_time": "2021-05-06",
+    "momentum_window_size": 3,
+    "env_data_path": {
+      "UVV": "data/uvv.json",
+      "TSLA": "data/tsla.json",
+      "JNJ": "data/jnj.json"
+    }
+  },
+  "portfolio_config": {
+    "trading_symbols": [
+      "UVV",
+      "TSLA",
+      "JNJ"
+    ],
+    "type": "multi-assets",
+    "cash": 100000000000,
+    "look_back_window_size": 3
+  },
+  "agent_config": {
+    "agent_name": "agent",
+    "trading_symbols": [
+      "UVV",
+      "TSLA",
+      "JNJ"
+    ],
+    "character_string": {
+      "UVV": "You accumulate a lot of information about Universal Corporation (UVV) in the following sectors so you are especially good at trading them: (1)Tobacco: This is the core sector for Universal Corporation, where they engage in the processing, procurement, and supply of leaf tobaccos. This includes various types of tobacco such as flue-cured, burley, and dark air-cured used in cigarettes and other tobacco products. (2) Ingredients: Universal Corporation has expanded into the plant-based ingredients sector. This involves producing and supplying plant-based ingredients derived from various agricultural products for food and beverage companies.You are an investment expert of Universal Corporation (UVV). You learned the following knowledge about Universal Corporation (UVV) based on your professional experience. Universal Corporation (UVV), a leading global leaf tobacco supplier, exhibited stable financial performance in 2019, with total revenues reaching $2.2 billion, consistent with the previous year's figures. The company's profitability in 2019 was robust, driven by strong global demand for tobacco products and operational efficiencies. However, the stock trended relatively flat throughout 2019, reflecting the mature nature of the tobacco market and ongoing global regulatory pressures. The year 2020 brought additional challenges, particularly due to the COVID-19 pandemic, which impacted the global supply chain and reduced demand in certain markets. Despite these hurdles, Universal Corporation managed to maintain operational continuity, although its revenue streams faced pressure in various geographic segments. By the end of the third quarter of 2020, UVV's stock had experienced volatility but showed signs of recovery as the company adapted to new market conditions and continued to leverage its strong position in the leaf tobacco sector. At the beginning of the fourth quarter of 2020, professional analysts were cautiously optimistic about Universal Corporation (UVV) for the remainder of the year and into 2021. For 2021, analysts expected a steady demand for UVV’s products, particularly in emerging markets, and saw potential growth opportunities in the company’s recent ventures into non-tobacco agricultural products, which could offset some of the declines in traditional tobacco sales.",
+      "TSLA": "You are an investment expert of TSLA. You learned the following knowledge about TSLA based on your professional experience. You accumulate a lot of information of TSLA on the following sectors so you are especially good at trading them:  (1) Consumer Cyclical, which encompasses companies that produce goods and services that consumers are more likely to purchase when the economy is flourishing. Tesla fits into this sector as it manufactures electric vehicles and renewable energy solutions, which are generally considered discretionary expenditures.  (2) Energy, which includes companies involved in the production, exploration, and distribution of energy. Tesla contributes to this sector through its renewable energy products, including solar panels and energy storage systems. (3) Auto Manufacturers, which comprises companies that design, develop, manufacture, market, and sell motor vehicles. Tesla is a key player in this industry, known for its high-performance electric cars and its pioneering role in advancing electric vehicle technology. (4) Auto Parts and Equipment, which involves the manufacturing of automobile parts and equipment. Tesla not only produces electric vehicles but also designs and manufactures electric vehicle powertrain components and battery technology. (5) Renewable Energy Equipment & Services, which includes companies that provide products and services related to energy efficiency and renewable energy. Tesla's product line includes solar energy solutions like Solar Roof tiles and energy storage products such as the Powerwall, Powerpack, and Megapack, which store electric energy for residential, commercial, and utility-scale projects. (6) Technology and Software, which encompass companies that offer advanced software solutions, including those that support autonomous driving and vehicle connectivity. Tesla is at the forefront with its development of innovative technologies like Autopilot and Full Self-Driving software, which integrate advanced AI systems for enhanced driving safety and efficiency. From 2019 to the end of the third quarter of 2020, Tesla Inc. (TSLA) experienced significant growth and dynamic stock market performance. In 2019, Tesla focused on ramping up production and managing costs, which set the stage for a profitable 2020. During this period, Tesla's revenue and earnings consistently improved, driven by increased vehicle deliveries and expansion into new markets. In 2020, despite the challenges posed by the COVID-19 pandemic, Tesla managed to sustain its momentum. The company's financial performance was robust, with a series of profitable quarters that exceeded analysts' expectations. For instance, in the third quarter of 2020, Tesla reported a substantial increase in adjusted earnings per share and a sharp rise in revenue, largely due to a significant boost in vehicle production and deliveries. Tesla's stock also reflected this positive performance trend. Overall, Tesla's financial journey from 2019 through the third quarter of 2020 showcased a company scaling up its capabilities and solidifying its position in the electric vehicle market, with its stock price mirroring this positive trajectory. At the end of the third quarter of 2020, while optimistic about Tesla's continued growth, analysts remained watchful of market dynamics and regulatory changes that could impact the company's performance​.",
+      "JNJ": "You accumulate a lot of information about Johnson & Johnson (JNJ) in the following sectors so you are especially good at trading them: (1) Pharmaceuticals Sector: This is the largest segment of Johnson & Johnson, involving the research, development, and sale of pharmaceutical products across various therapeutic areas such as immunology, oncology, neurology, and infectious diseases. (2) Medical Devices Sector: JNJ is a significant player in the medical devices sector, providing a wide range of products used in orthopedics, surgery, cardiovascular, diabetes care, and other fields. (3) Consumer Health Sector: This sector includes a broad array of over-the-counter (OTC) products, skin care products, and baby care products, among other consumer health items. You are an investment expert of Johnson & Johnson (JNJ). You learned the following knowledge about Johnson & Johnson (JNJ) based on your professional experience. Johnson & Johnson (JNJ) demonstrated robust financial performance in 2019, generating revenues of $82.1 billion, up 0.6% from the previous year, driven by strong sales in its pharmaceuticals and medical devices segments. The company's net earnings for the year stood at $15.1 billion, reflecting a solid operational performance and strategic management of its diversified healthcare portfolio. JNJ's stock performed well in 2019, buoyed by consistent earnings growth and a reputation for stability in the healthcare sector. In 2020, JNJ faced unprecedented challenges due to the COVID-19 pandemic, impacting its medical devices segment due to reduced elective surgeries. However, its pharmaceuticals and consumer health divisions saw increased demand, particularly for products related to immune health and hygiene. By the end of the third quarter of 2020, JNJ's stock had shown resilience, recovering from a dip in March, driven by positive news regarding its progress on a COVID-19 vaccine candidate and stable financial performance despite global economic uncertainties. At the beginning of the fourth quarter of 2020, professional analysts were optimistic about Johnson & Johnson (JNJ) for the rest of the year and into 2021. They expected continued resilience in JNJ's pharmaceutical and consumer health segments, which could offset challenges faced by the medical devices division due to the pandemic. For 2021, analysts were particularly positive about the potential approval and distribution of JNJ’s COVID-19 vaccine, which could significantly boost the company’s profile and financial performance, alongside a recovery in elective medical procedures as global conditions improve."
+    },
+    "top_k": 5,
+    "memory_db_config": {
+      "memory_db_endpoint": "http://localhost:6344",
+      "memory_importance_upper_bound": 100.0,
+      "memory_importance_score_update_step": 18.0,
+      "trading_symbols": [
+        "UVV",
+        "TSLA",
+        "JNJ"
+      ],
+      "short": {
+        "db_name": "short",
+        "importance_init_val": 50.0,
+        "decay_recency_factor": 3.0,
+        "decay_importance_factor": 0.92,
+        "clean_up_recency_threshold": 0.05,
+        "clean_up_importance_threshold": 5.0,
+        "jump_upper_threshold": 55.0
+      },
+      "mid": {
+        "db_name": "mid",
+        "importance_init_val": 60.0,
+        "decay_recency_factor": 90.0,
+        "decay_importance_factor": 0.96,
+        "clean_up_recency_threshold": 0.05,
+        "clean_up_importance_threshold": 5.0,
+        "jump_lower_threshold": 55.0,
+        "jump_upper_threshold": 85.0
+      },
+      "long": {
+        "db_name": "long",
+        "importance_init_val": 90.0,
+        "decay_recency_factor": 365.0,
+        "decay_importance_factor": 0.96,
+        "clean_up_recency_threshold": 0.05,
+        "clean_up_importance_threshold": 5.0,
+        "jump_lower_threshold": 85.0
+      },
+      "reflection": {
+        "db_name": "reflection",
+        "importance_init_val": 80.0,
+        "decay_recency_factor": 365.0,
+        "decay_importance_factor": 0.98,
+        "clean_up_recency_threshold": 0.05,
+        "clean_up_importance_threshold": 5.0,
+        "similarity_threshold": 0.95
+      }
+    }
+  },
+  "meta_config": {
+    "run_name": "exp",
+    "momentum_window_size": 3,
+    "warmup_checkpoint_save_path": "results/exp/llama-3.1-8b-instruct/UVV_TSLA_JNJ/warmup_checkpoint",
+    "warmup_output_save_path": "results/exp/llama-3.1-8b-instruct/UVV_TSLA_JNJ/warmup_output",
+    "test_checkpoint_save_path": "results/exp/llama-3.1-8b-instruct/UVV_TSLA_JNJ/test_checkpoint",
+    "test_output_save_path": "results/exp/llama-3.1-8b-instruct/UVV_TSLA_JNJ/test_output",
+    "result_save_path": "results/exp/llama-3.1-8b-instruct/UVV_TSLA_JNJ/final_result",
+    "log_save_path": "results/exp/llama-3.1-8b-instruct/UVV_TSLA_JNJ/log"
+  }
+}

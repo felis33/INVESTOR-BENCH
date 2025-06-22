@@ -1,0 +1,66 @@
+open class MemoryConfigBase {
+    db_name: String
+    importance_init_val: Float(this > 0)
+    decay_recency_factor: Float
+    decay_importance_factor: Float(this <= 1.0)
+    clean_up_recency_threshold: Float
+    clean_up_importance_threshold: Float
+}
+
+class MidMemoryConfig extends MemoryConfigBase {
+    jump_lower_threshold: Float(this <= 100)
+    jump_upper_threshold: Float(this <= 100)
+}
+
+class ShortMemoryConfig extends MemoryConfigBase {
+    jump_upper_threshold: Float(this <= 100)
+}
+
+class LongMemoryConfig extends MemoryConfigBase {
+    jump_lower_threshold: Float(this <= 100)
+}
+
+class ReflectionMemoryConfig extends MemoryConfigBase {
+    similarity_threshold: Float(this >= 0 && this <= 1)
+}
+
+short_config = new ShortMemoryConfig {
+    db_name = "short"
+    importance_init_val = 50.0
+    decay_recency_factor = 3.0
+    decay_importance_factor = 0.92
+    clean_up_recency_threshold = 0.05
+    clean_up_importance_threshold = 5.0
+    jump_upper_threshold = 55.0
+}
+
+mid_config = new MidMemoryConfig {
+    db_name = "mid"
+    importance_init_val = 60.0
+    decay_recency_factor = 90.0
+    decay_importance_factor = 0.96
+    clean_up_recency_threshold = 0.05
+    clean_up_importance_threshold = 5.0
+    jump_upper_threshold = 85.0
+    jump_lower_threshold = 55.0
+}
+
+long_config = new LongMemoryConfig {
+    db_name = "long"
+    importance_init_val = 90.0
+    decay_recency_factor = 365.0
+    decay_importance_factor = 0.96
+    clean_up_recency_threshold = 0.05
+    clean_up_importance_threshold = 5.0
+    jump_lower_threshold = 85.0
+}
+
+reflection_config = new ReflectionMemoryConfig {
+    db_name = "reflection"
+    importance_init_val = 80.0
+    decay_recency_factor = 365.0
+    decay_importance_factor = 0.98
+    clean_up_recency_threshold = 0.05
+    clean_up_importance_threshold = 5.0
+    similarity_threshold = 0.95
+}

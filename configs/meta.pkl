@@ -1,0 +1,25 @@
+import "chat_models.pkl"
+import "character_string_catalog.pkl"
+
+class MetaConfig {
+    run_name: String
+    agent_name: String
+    trading_symbols: Listing<String(character_string_catalog.character_string_dict.toMap().keys.contains(this))>
+    warmup_start_time: String
+    warmup_end_time: String
+    test_start_time: String
+    test_end_time: String
+    top_k: Int(this >= 1)
+    look_back_window_size: Int(this >= 1)
+    momentum_window_size: Int(this >= 1)
+    embedding_model: String(this is "text-embedding-3-large"|"text-embedding-3-small"|"text-embedding-ada-002")
+    embedding_timeout: Int(this >= 100) = 600
+    chat_request_timeout: Int(this >= 1000) = 1000
+    chat_model: String(chat_models.chat_model_dict.toMap().keys.contains(this))
+    chat_max_new_token: Int(this >= 3) = 1000
+    chat_vllm_endpoint: String | Null = null
+    chat_parameters: Mapping
+    memory_db_endpoint: String = "http://localhost:6344"
+    memory_importance_upper_bound: Float(this > 0) = 100.0
+    memory_importance_score_update_step: Float(this > 0) = 18.0
+}
