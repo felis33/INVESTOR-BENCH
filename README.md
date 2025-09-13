@@ -1,4 +1,5 @@
 # InvestorBench
+[![arXiv](https://img.shields.io/badge/arXiv-2311.13743-b31b1b.svg)](https://arxiv.org/abs/2412.18174)
 
 🚀 **InvestorBench has been accepted by ACL 2025 main [Link](https://aclanthology.org/2025.acl-long.126/) <br>**
 
