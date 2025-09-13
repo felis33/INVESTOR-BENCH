@@ -1,5 +1,8 @@
 # InvestorBench
 
+🚀 InvestorBench has been accepted by ACL 2025 main [Link](https://aclanthology.org/2025.acl-long.126/) <br>
+
+
 ## Usage
 
 In this section, we provide a step-by-step guide to running the evaluation framework with the fine-tuned LLM. The evaluation framework consists of three parts:
