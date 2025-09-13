@@ -1,6 +1,6 @@
 # InvestorBench
 
-🚀 InvestorBench has been accepted by ACL 2025 main [Link](https://aclanthology.org/2025.acl-long.126/) <br>
+🚀 **InvestorBench has been accepted by ACL 2025 main [Link](https://aclanthology.org/2025.acl-long.126/) <br>**
 
 
 ## Usage
